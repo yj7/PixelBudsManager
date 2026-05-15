@@ -7,13 +7,22 @@
  * to bypass macOS and Content Security Policy restrictions.
  */
 
-const { app, shell, ipcMain, BrowserWindow, session } = require('electron');
+const { app, shell, ipcMain, BrowserWindow, session, Menu } = require('electron');
 const { menubar } = require('menubar');
 const path = require('path');
 
 // Enable Web Bluetooth functionality in Electron
 app.commandLine.appendSwitch('enable-web-bluetooth', true);
 app.commandLine.appendSwitch('enable-experimental-web-platform-features', true);
+
+// Configure the native macOS About Panel
+app.setAboutPanelOptions({
+  applicationName: 'Pixel Buds Manager',
+  applicationVersion: '1.0.0',
+  version: 'Unofficial Community Build',
+  copyright: 'Disclaimer: Not affiliated with Google LLC.',
+  iconPath: path.join(__dirname, 'assets', 'icon.png')
+});
 
 app.on('ready', () => {
   // Explicitly allow all permissions (including Bluetooth) to ensure macOS
@@ -38,6 +47,36 @@ app.on('ready', () => {
     },
     preloadWindow: true,
     showDockIcon: false
+  });
+
+  mb.on('ready', () => {
+    // Add right-click context menu for Preferences and About
+    mb.tray.on('right-click', () => {
+      const contextMenu = Menu.buildFromTemplate([
+        { 
+          label: 'About Pixel Buds Manager', 
+          click: () => app.showAboutPanel() 
+        },
+        { type: 'separator' },
+        { 
+          label: 'Start at Login', 
+          type: 'checkbox', 
+          checked: app.getLoginItemSettings().openAtLogin, 
+          click: (item) => {
+            app.setLoginItemSettings({
+              openAtLogin: item.checked,
+              openAsHidden: true
+            });
+          }
+        },
+        { type: 'separator' },
+        { 
+          label: 'Quit', 
+          click: () => app.quit() 
+        }
+      ]);
+      mb.tray.popUpContextMenu(contextMenu);
+    });
   });
 
   // State variables for the Bluetooth device picker

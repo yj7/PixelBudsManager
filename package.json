@@ -13,7 +13,7 @@
     "appId": "com.pixelbudsmanager.app",
     "mac": {
       "category": "public.app-category.utilities",
-      "target": ["dir"],
+      "target": ["dmg", "zip", "dir"],
       "icon": "assets/icon.png",
       "extendInfo": {
         "NSBluetoothAlwaysUsageDescription": "This app needs Bluetooth access to connect to your Pixel Buds."
