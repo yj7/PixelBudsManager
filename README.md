@@ -5,6 +5,8 @@
 
 A lightweight, native-feeling macOS menu bar application that wraps the official [Google Pixel Buds web companion](https://mypixelbuds.google.com/). It adds native Web Bluetooth support with a custom device picker to seamlessly bypass macOS Bluetooth limitations inside Electron.
 
+![App Screenshot](assets/screenshot.png)
+
 ## Features
 - **Menu Bar Integration**: Quick access to your Pixel Buds settings straight from your Mac's menu bar.
 - **Web Bluetooth Support**: Fixes the issue where standard web wrappers fail to trigger the macOS Bluetooth permission prompts.
