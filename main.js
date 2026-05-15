@@ -19,6 +19,8 @@ app.commandLine.appendSwitch('enable-experimental-web-platform-features', true);
 app.setAboutPanelOptions({
   applicationName: 'Pixel Buds Manager',
   applicationVersion: '1.0.0',
+  authors: ['Yash Jhunjhunwala, Last Minute Code'],
+  website: 'https://github.com/yj7/PixelBudsManager',
   version: 'Unofficial Community Build',
   copyright: 'Disclaimer: Not affiliated with Google LLC.',
   iconPath: path.join(__dirname, 'assets', 'icon.png')
@@ -53,15 +55,15 @@ app.on('ready', () => {
     // Add right-click context menu for Preferences and About
     mb.tray.on('right-click', () => {
       const contextMenu = Menu.buildFromTemplate([
-        { 
-          label: 'About Pixel Buds Manager', 
-          click: () => app.showAboutPanel() 
+        {
+          label: 'About Pixel Buds Manager',
+          click: () => app.showAboutPanel()
         },
         { type: 'separator' },
-        { 
-          label: 'Start at Login', 
-          type: 'checkbox', 
-          checked: app.getLoginItemSettings().openAtLogin, 
+        {
+          label: 'Start at Login',
+          type: 'checkbox',
+          checked: app.getLoginItemSettings().openAtLogin,
           click: (item) => {
             app.setLoginItemSettings({
               openAtLogin: item.checked,
@@ -70,9 +72,9 @@ app.on('ready', () => {
           }
         },
         { type: 'separator' },
-        { 
-          label: 'Quit', 
-          click: () => app.quit() 
+        {
+          label: 'Quit',
+          click: () => app.quit()
         }
       ]);
       mb.tray.popUpContextMenu(contextMenu);
