@@ -19,10 +19,9 @@ app.commandLine.appendSwitch('enable-experimental-web-platform-features', true);
 app.setAboutPanelOptions({
   applicationName: 'Pixel Buds Manager',
   applicationVersion: '1.0.0',
-  authors: ['Yash Jhunjhunwala, Last Minute Code'],
   website: 'https://github.com/yj7/PixelBudsManager',
   version: 'Unofficial Community Build',
-  copyright: 'Disclaimer: Not affiliated with Google LLC.',
+  copyright: 'Developed by Yash Jhunjhunwala, Last Minute Code\nDisclaimer: Not affiliated with Google LLC.',
   iconPath: path.join(__dirname, 'assets', 'icon.png')
 });
 
