@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; background: #fff; color: #333; margin: 0; }
+    h3 { margin-top: 0; font-size: 18px; text-align: center; }
+    #devices { margin-bottom: 20px; }
+    button { display: block; width: 100%; padding: 12px; margin-bottom: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+    .device-btn { background: #1a73e8; color: white; font-weight: 500; }
+    .device-btn:hover { background: #1557b0; }
+    .cancel-btn { background: #f1f3f4; color: #3c4043; font-weight: 500; }
+    .cancel-btn:hover { background: #e8eaed; }
+    #status { font-size: 14px; color: #666; margin-bottom: 15px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h3>Select a Device</h3>
+  <div id="status">Scanning for Pixel Buds...</div>
+  <div id="devices"></div>
+  <button class="cancel-btn" onclick="cancel()">Cancel</button>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    ipcRenderer.on('update-devices', (event, devices) => {
+      const status = document.getElementById('status');
+      const container = document.getElementById('devices');
+      
+      if (devices.length > 0) {
+        status.style.display = 'none';
+      } else {
+        status.style.display = 'block';
+      }
+
+      container.innerHTML = '';
+      devices.forEach(device => {
+        const btn = document.createElement('button');
+        btn.className = 'device-btn';
+        btn.innerText = device.deviceName || 'Unknown Device';
+        btn.onclick = () => {
+          ipcRenderer.send('bluetooth-device-selected', device.deviceId);
+        };
+        container.appendChild(btn);
+      });
+    });
+
+    function cancel() {
+      ipcRenderer.send('bluetooth-device-cancel');
+    }
+  </script>
+</body>
+</html>

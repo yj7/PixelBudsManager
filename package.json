@@ -1,0 +1,34 @@
+{
+  "name": "pixel-buds-manager",
+  "productName": "Pixel Buds Manager",
+  "version": "1.0.0",
+  "description": "macOS menu bar utility for Google Pixel Buds",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --mac",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.pixelbudsmanager.app",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": ["dir"],
+      "icon": "assets/icon.png",
+      "extendInfo": {
+        "NSBluetoothAlwaysUsageDescription": "This app needs Bluetooth access to connect to your Pixel Buds."
+      }
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "menubar": "^9.5.2"
+  },
+  "devDependencies": {
+    "electron": "^42.1.0",
+    "electron-builder": "^26.8.1"
+  }
+}
